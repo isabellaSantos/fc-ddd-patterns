@@ -1,4 +1,6 @@
 import OrderItem from "./order_item";
+import Customer from "../../customer/entity/customer";
+
 export default class Order {
   private _id: string;
   private _customerId: string;
@@ -45,5 +47,15 @@ export default class Order {
 
   total(): number {
     return this._items.reduce((acc, item) => acc + item.price, 0);
+  }
+
+  changeCustomer(customer: Customer) {
+    this._customerId = customer.id;
+    this.validate();
+  }
+
+  changeItems(items: OrderItem[]) {
+    this._items = items;
+    this.validate();
   }
 }
